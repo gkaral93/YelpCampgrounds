@@ -4,6 +4,7 @@ const port = 3000
 const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate') //layout, partial and block template functions
 
 var methodOverride = require('method-override') // use HTTP verbs: PUT or DELETE in places where the client doesn’t support it.
 app.use(methodOverride('_method'))
@@ -27,7 +28,10 @@ db.once("open", () => {
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+app.engine('ejs', ejsMate);
 app.set('views', path.join(__dirname, 'views'));
+
+
 
 app.get('/', (req, res) => {
     res.render('home')

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 //Everything in Mongoose starts with a Schema
 const CampgroundSchema = new Schema({
     title: String, //{type: String}
-    price: String,
+    price: Number,
+    image: String,
     description: String,
     location: String
 })

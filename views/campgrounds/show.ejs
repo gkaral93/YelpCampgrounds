@@ -1,32 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate') -%>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card mb-3">
+                <img src="<%=campground.image%>" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= campground.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= campground.description %>
+                    </p>
+                </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campground show</title>
-</head>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <%= campground.location %>
+                    </li>
+                    <li class="list-group-item">$<%= campground.price %>/night</li>
+                </ul>
 
-<body>
-    <h1><u>Campground</u></h1>
-    <h2>
-        <%= campground.title %>
-    </h2>
-    <h3>
-        <%= campground.location %>
-    </h3>
-    <footer>
-        <a href="/campgrounds/<%=campground._id%>/edit"><button>Edit Campground</button></a>
-        <p></p>
+                <div class="card-body">
+                    <a href="/campgrounds/<%=campground._id%>/edit" class="card-link ">Edit Campground</a>
+                    <form class="d-inline" action="/campgrounds/<%=campground._id%>?_method=DELETE" <%#Delete route%>
+                        method="post"><button class="btn btn-danger ">Delete
+                            Campground</button>
+                </div>
 
-        <form action="/campgrounds/<%=campground._id%>?_method=DELETE" <%#Delete route%> method="post"><button>Delete
-                Campground</button>
+                <div class="card-footer text-muted">
+                    <a href="/campgrounds/">All Campgrounds</a>
+                </div>
 
-        </form>
-        <p></p>
-        <a href="/campgrounds"> <button>All Campgrounds</button> </a>
-    </footer>
-</body>
-
-</html>
+            </div>
+        </div>
+    </div>
