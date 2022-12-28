@@ -19,14 +19,14 @@
                 </ul>
                 <div class="card-body">
                     <a href="/campgrounds/<%=campground._id%>/edit" class=" d-inline">
-                        <button class="btn btn-success"> Edit Campground </button>
+                        <button class="btn btn-success btn-sm"> Edit Campground </button>
                     </a>
                     <form class="d-inline" action="/campgrounds/<%=campground._id%>?_method=DELETE" <%#Delete route%>
-                        method="post"><button class="btn btn-danger "> Delete Campground</button>
+                        method="post"><button class="btn btn-danger btn-sm "> Delete Campground</button>
                     </form>
 
                     <div class="d-inline">
-                        <a href="/campgrounds/"><button class="btn btn-success">All Campgrounds</button></a>
+                        <a href="/campgrounds/"><button class="btn btn-success btn-sm">All Campgrounds</button></a>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                         <form action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
                             method="post">
 
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-danger ">Delete</button>
 
                         </form>
                     </div>
@@ -78,7 +78,7 @@
                                         required></textarea>
 
                                 </div>
-                                <button class="btn btn-success">Submit</button>
+                                <button class="btn btn-success btn-sm">Submit</button>
                             </form>
                         </div>
         </div>
