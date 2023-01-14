@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require('dotenv').config();
+}
+
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -18,8 +22,12 @@ const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 
+const MongoDBStore = require('connect-mongo');
+
+const dbUrl='mongodb://127.0.0.1:27017/yelp-camp'
+
 //  MongoDB Connection
-mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp", {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -41,7 +49,19 @@ const methodOverride = require("method-override"); // use HTTP verbs: PUT or DEL
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public"))); // root directory from which to serve static assets
 
+const store = MongoDBStore.create({
+  mongoUrl: dbUrl,
+  secret: 'secret',
+  touchAfter: 24 * 60 * 60
+});
+
+store.on("error", function (e) {
+  console.log("Session store error!", e)
+});
+
 const sessionConfig = {
+  store,
+  name:'session',
   secret: "secret",
   resave: false,
   saveUninitialized: true,
@@ -70,12 +90,6 @@ app.use((req, res, next) => {
 });
 
 //ROUTES
-app.get("/fakeUser", async (req, res) => {
-  const user = new User({ email: "sdsadas@gmail.com", username: "GK" });
-  const newUser = await User.register(user, "123");
-  res.send(newUser);
-});
-
 app.use("/", userRoutes);
 app.use("/campgrounds", campgroundRoutes); // using router on Campgrounds
 app.use("/campgrounds/:id/reviews", reviewRoutes); // using router on Reviews

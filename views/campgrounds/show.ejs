@@ -1,4 +1,6 @@
 <% layout('layouts/boilerplate') -%>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
     <div class="row">
         <div class="col-6 ">
             <div class="card mb-3">
@@ -33,23 +35,23 @@
                         <a href="/campgrounds/"><button class="btn btn-success btn-sm">All Campgrounds</button></a>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
 
         <div class="col-6">
             <!-----                   SHOW REVIEWS                    ------>
             <% for( let review of campground.reviews) { %>
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h4 class="card-title">
-                            Rating: <%= review.rating %>
-                        </h4>
-                        <p class="card-subtitle mb-2 text-muted">
-                            User: <%= review.author.username %>
+                        <!-- <h4 class="card-title">
+                            Rating: 
+                        </h4> -->
+                        <p class="card-subtitle mb-2">
+                            <%= review.author.username %>
                         </p>
+                        <p class="starability-result" data-rating="<%=review.rating  %>">
+                            Rated: <%=review.rating  %> stars
+                          </p>
                         <p class="card-text">
                             Review: <%= review.body %>
                         </p>
